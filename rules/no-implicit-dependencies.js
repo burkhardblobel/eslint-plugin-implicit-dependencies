@@ -86,8 +86,11 @@ module.exports = {
         }
       },
       'ImportDeclaration:exit': (node) => {
-        const name = node.source.value;
-        checkModuleName(name, node);
+        // ignore type imports
+        if (node.importKind !== "type") {
+          const name = node.source.value;
+          checkModuleName(name, node);
+        }
       }
     };
   }
